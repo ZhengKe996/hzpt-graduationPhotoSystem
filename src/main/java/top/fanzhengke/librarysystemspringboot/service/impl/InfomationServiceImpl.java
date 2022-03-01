@@ -1,7 +1,10 @@
 package top.fanzhengke.librarysystemspringboot.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import top.fanzhengke.librarysystemspringboot.domain.Infomation;
+import top.fanzhengke.librarysystemspringboot.entity.PageResult;
 import top.fanzhengke.librarysystemspringboot.mapper.InfomationMapper;
 import top.fanzhengke.librarysystemspringboot.service.InfomationService;
 
@@ -14,8 +17,11 @@ public class InfomationServiceImpl implements InfomationService {
     private InfomationMapper infomationMapper;
 
     @Override
-    public List<Infomation> findAll() {
-        return infomationMapper.findAll();
+    public PageResult findAll(Integer currentPage, Integer pageSize, String year, Integer cid) {
+        PageHelper.startPage(currentPage, pageSize);
+        Page<Infomation> page = infomationMapper.findAll(year, cid);
+
+        return new PageResult(page.getTotal(), page.getResult());
     }
 
     @Override

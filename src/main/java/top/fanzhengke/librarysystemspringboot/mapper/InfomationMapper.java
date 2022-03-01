@@ -1,5 +1,6 @@
 package top.fanzhengke.librarysystemspringboot.mapper;
 
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import top.fanzhengke.librarysystemspringboot.domain.Infomation;
@@ -10,8 +11,23 @@ import java.util.List;
 @Repository
 public interface InfomationMapper {
 
-    @Select("select * from infomation")
-    public List<Infomation> findAll();
+    @Select("<script>"
+            + "select * from infomation"
+            +   "<choose>"
+            +       "<when test = 'year != null and cid != null'>"
+            +           "where years = #{year} and cid = #{cid}"
+            +       "</when>"
+            +       "<otherwise>"
+            +           "<if test = 'year != null'>"
+            +               "where years = #{year}"
+            +           "</if>"
+            +           "<if test = 'cid != null'>"
+            +               "where cid = #{cid}"
+            +           "</if>"
+            +       "</otherwise>"
+            +   "</choose>"
+            +"</script>")
+    public Page<Infomation> findAll(String year, Integer cid);
 
     @Select("select * from infomation where id = #{id}")
     public Infomation findById(Integer id);
@@ -33,21 +49,21 @@ public interface InfomationMapper {
 
     @Update("<script>"
             + "update infomation set"
-            + "<if test = 'years != null'>"
-            + "years = #{years},"
-            + "</if>"
-            + "<if test = 'cid != null'>"
-            + "cid = #{cid},"
-            + "</if>"
-            + "<if test = 'mid != null'>"
-            + "mid = #{mid},"
-            + "</if>"
-            + "<if test = 'cname != null'>"
-            + "cname = #{cname},"
-            + "</if>"
-            + "<if test = 'img != null'>"
-            + "img = #{img}"
-            + "</if>"
+            +   "<if test = 'years != null'>"
+            +       "years = #{years},"
+            +   "</if>"
+            +   "<if test = 'cid != null'>"
+            +       "cid = #{cid},"
+            +   "</if>"
+            +   "<if test = 'mid != null'>"
+            +       "mid = #{mid},"
+            +   "</if>"
+            +   "<if test = 'cname != null'>"
+            +       "cname = #{cname},"
+            +   "</if>"
+            +   "<if test = 'img != null'>"
+            +       "img = #{img}"
+            +   "</if>"
             + "where id = #{id}"
             + "</script>")
     public Boolean update(Infomation infomation);

@@ -24,9 +24,9 @@ public interface CollegeMapper {
 
     @Update("<script>"
             + "update college set"
-            + "<if test = 'college != null'>"
-            + "college = #{college}"
-            + "</if>"
+            +   "<if test = 'college != null'>"
+            +       "college = #{college}"
+            +   "</if>"
             + "where id = #{id}"
             + "</script>")
     public Boolean updateCollege(College college);

@@ -1,6 +1,7 @@
 package top.fanzhengke.librarysystemspringboot.service;
 
 import top.fanzhengke.librarysystemspringboot.domain.Marjor;
+import top.fanzhengke.librarysystemspringboot.entity.PageResult;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface MarjorService {
      *
      * @return
      */
-    public List<Marjor> findAll();
+    public PageResult findAll(Integer currentPage, Integer pageSize, Integer query);
 
     /**
      * 根据id查询专业

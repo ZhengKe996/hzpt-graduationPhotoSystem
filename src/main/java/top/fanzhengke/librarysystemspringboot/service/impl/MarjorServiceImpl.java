@@ -1,7 +1,10 @@
 package top.fanzhengke.librarysystemspringboot.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import top.fanzhengke.librarysystemspringboot.domain.Marjor;
+import top.fanzhengke.librarysystemspringboot.entity.PageResult;
 import top.fanzhengke.librarysystemspringboot.mapper.MarjorMapper;
 import top.fanzhengke.librarysystemspringboot.service.MarjorService;
 
@@ -14,8 +17,10 @@ public class MarjorServiceImpl implements MarjorService {
     private MarjorMapper marjorMapper;
 
     @Override
-    public List<Marjor> findAll() {
-        return marjorMapper.findAll();
+    public PageResult findAll(Integer currentPage, Integer pageSize, Integer query) {
+        PageHelper.startPage(currentPage, pageSize);
+        Page<Marjor> page = marjorMapper.findAll(query);
+        return new PageResult(page.getTotal(), page.getResult());
     }
 
     @Override

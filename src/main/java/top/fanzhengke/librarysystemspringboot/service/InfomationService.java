@@ -1,6 +1,7 @@
 package top.fanzhengke.librarysystemspringboot.service;
 
 import top.fanzhengke.librarysystemspringboot.domain.Infomation;
+import top.fanzhengke.librarysystemspringboot.entity.PageResult;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface InfomationService {
      *
      * @return
      */
-    public List<Infomation> findAll();
+    public PageResult findAll(Integer currentPage, Integer pageSize, String year, Integer cid);
 
     /**
      * 根据id查询

@@ -3,6 +3,7 @@ package top.fanzhengke.librarysystemspringboot.controller;
 import org.springframework.web.bind.annotation.*;
 import top.fanzhengke.librarysystemspringboot.constant.MessageConstant;
 import top.fanzhengke.librarysystemspringboot.domain.Marjor;
+import top.fanzhengke.librarysystemspringboot.entity.PageResult;
 import top.fanzhengke.librarysystemspringboot.entity.Result;
 import top.fanzhengke.librarysystemspringboot.service.MarjorService;
 
@@ -16,9 +17,9 @@ public class MarjorController {
     private MarjorService marjorService;
 
     @GetMapping
-    public Result findAll() {
+    public Result pageQuery(@RequestParam("page") Integer currentPage, @RequestParam("size") Integer pageSize, @RequestParam(value = "cid", required = false) Integer query) {
         try {
-            List<Marjor> list = marjorService.findAll();
+            PageResult list = marjorService.findAll(currentPage, pageSize, query);
             return new Result(true, MessageConstant.QUERY_MARJOR_SUCCESS, list);
         } catch (Exception e) {
             e.printStackTrace();

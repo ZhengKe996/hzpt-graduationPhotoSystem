@@ -3,6 +3,7 @@ package top.fanzhengke.librarysystemspringboot.controller;
 import org.springframework.web.bind.annotation.*;
 import top.fanzhengke.librarysystemspringboot.constant.MessageConstant;
 import top.fanzhengke.librarysystemspringboot.domain.Infomation;
+import top.fanzhengke.librarysystemspringboot.entity.PageResult;
 import top.fanzhengke.librarysystemspringboot.entity.Result;
 import top.fanzhengke.librarysystemspringboot.service.InfomationService;
 
@@ -16,9 +17,9 @@ public class InfomationController {
     private InfomationService infomationService;
 
     @GetMapping
-    public Result findAll() {
+    public Result findAll(@RequestParam("page") Integer currentPage, @RequestParam("size") Integer pageSize, @RequestParam(value = "year", required = false) String year, @RequestParam(value = "cid", required = false) Integer cid) {
         try {
-            List<Infomation> list = infomationService.findAll();
+            PageResult list = infomationService.findAll(currentPage, pageSize, year, cid);
             return new Result(true, MessageConstant.QUERY_INFO_SUCCESS, list);
         } catch (Exception e) {
             e.printStackTrace();

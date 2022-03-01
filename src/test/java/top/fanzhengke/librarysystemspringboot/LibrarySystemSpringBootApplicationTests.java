@@ -68,7 +68,7 @@ class LibrarySystemSpringBootApplicationTests {
 
     @Test
     void marjorFindAll() {
-        List<Marjor> list = marjorMapper.findAll();
+        List<Marjor> list = marjorMapper.findAll(1);
         for (Marjor marjor : list) {
             System.out.println(marjor);
         }
@@ -147,7 +147,7 @@ class LibrarySystemSpringBootApplicationTests {
 
     @Test
     void infoFindAll() {
-        List<Infomation> list = infomationMapper.findAll();
+        List<Infomation> list = infomationMapper.findAll("2022",1);
         for (Infomation infomation : list) {
             System.out.println(infomation.getId());
             System.out.println(infomation.getCname());
