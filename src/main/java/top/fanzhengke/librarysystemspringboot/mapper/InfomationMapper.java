@@ -13,20 +13,20 @@ public interface InfomationMapper {
 
     @Select("<script>"
             + "select * from infomation"
-            +   "<choose>"
-            +       "<when test = 'year != null and cid != null'>"
-            +           "where years = #{year} and cid = #{cid}"
-            +       "</when>"
-            +       "<otherwise>"
-            +           "<if test = 'year != null'>"
-            +               "where years = #{year}"
-            +           "</if>"
-            +           "<if test = 'cid != null'>"
-            +               "where cid = #{cid}"
-            +           "</if>"
-            +       "</otherwise>"
-            +   "</choose>"
-            +"</script>")
+            + "<choose>"
+            + "<when test = 'year != null and cid != null'>"
+            + "where years = #{year} and cid = #{cid}"
+            + "</when>"
+            + "<otherwise>"
+            + "<if test = 'year != null'>"
+            + "where years = #{year}"
+            + "</if>"
+            + "<if test = 'cid != null'>"
+            + "where cid = #{cid}"
+            + "</if>"
+            + "</otherwise>"
+            + "</choose>"
+            + "</script>")
     public Page<Infomation> findAll(String year, Integer cid);
 
     @Select("select * from infomation where id = #{id}")
@@ -37,6 +37,9 @@ public interface InfomationMapper {
 
     @Select("select mid from infomation where cid = #{cid} and years = #{years} group by mid")
     public List<String> findMarjor(Integer cid, String years);
+
+    @Select("select mid from infomation where mid = #{mid} group by mid")
+    public String findByMid(Integer mid);
 
     @Select("select cname from infomation where cid = #{cid} and years = #{years} and mid = #{mid}")
     public List<String> findClassName(Integer cid, String years, Integer mid);
@@ -49,21 +52,21 @@ public interface InfomationMapper {
 
     @Update("<script>"
             + "update infomation set"
-            +   "<if test = 'years != null'>"
-            +       "years = #{years},"
-            +   "</if>"
-            +   "<if test = 'cid != null'>"
-            +       "cid = #{cid},"
-            +   "</if>"
-            +   "<if test = 'mid != null'>"
-            +       "mid = #{mid},"
-            +   "</if>"
-            +   "<if test = 'cname != null'>"
-            +       "cname = #{cname},"
-            +   "</if>"
-            +   "<if test = 'img != null'>"
-            +       "img = #{img}"
-            +   "</if>"
+            + "<if test = 'years != null'>"
+            + "years = #{years},"
+            + "</if>"
+            + "<if test = 'cid != null'>"
+            + "cid = #{cid},"
+            + "</if>"
+            + "<if test = 'mid != null'>"
+            + "mid = #{mid},"
+            + "</if>"
+            + "<if test = 'cname != null'>"
+            + "cname = #{cname},"
+            + "</if>"
+            + "<if test = 'img != null'>"
+            + "img = #{img}"
+            + "</if>"
             + "where id = #{id}"
             + "</script>")
     public Boolean update(Infomation infomation);

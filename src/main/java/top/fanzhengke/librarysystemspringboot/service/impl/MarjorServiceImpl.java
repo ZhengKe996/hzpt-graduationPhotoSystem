@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
 import top.fanzhengke.librarysystemspringboot.domain.Marjor;
 import top.fanzhengke.librarysystemspringboot.entity.PageResult;
+import top.fanzhengke.librarysystemspringboot.mapper.InfomationMapper;
 import top.fanzhengke.librarysystemspringboot.mapper.MarjorMapper;
 import top.fanzhengke.librarysystemspringboot.service.MarjorService;
 
@@ -15,6 +16,9 @@ import java.util.List;
 public class MarjorServiceImpl implements MarjorService {
     @Resource
     private MarjorMapper marjorMapper;
+
+    @Resource
+    private InfomationMapper infomationMapper;
 
     @Override
     public PageResult findAll(Integer currentPage, Integer pageSize, Integer query) {
@@ -35,11 +39,23 @@ public class MarjorServiceImpl implements MarjorService {
 
     @Override
     public Boolean delete(Integer id) {
+        Marjor marjor = marjorMapper.findById(id);
+        if (marjor == null) {
+            throw new RuntimeException("删除专业失败,请检查专业ID是否正确");
+        }
+        String mid = infomationMapper.findByMid(id);
+        if (mid != null) {
+            throw new RuntimeException("删除专业失败,请先删除旗下班级");
+        }
         return marjorMapper.delete(id);
     }
 
     @Override
     public Boolean update(Marjor marjor) {
+        Marjor marjorMapperById = marjorMapper.findById(marjor.getId());
+        if (marjorMapperById == null) {
+            throw new RuntimeException("编辑专业失败,请检查专业ID是否正确");
+        }
         return marjorMapper.update(marjor);
     }
 

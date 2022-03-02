@@ -46,6 +46,10 @@ public class InfomationServiceImpl implements InfomationService {
 
     @Override
     public Boolean delete(Integer id) {
+        Infomation infomation = infomationMapper.findById(id);
+        if (infomation == null) {
+            throw new RuntimeException("删除失败,请检查ID是否正确");
+        }
         return infomationMapper.delete(id);
     }
 
@@ -56,6 +60,10 @@ public class InfomationServiceImpl implements InfomationService {
 
     @Override
     public Boolean update(Infomation infomation) {
+        Infomation infomationMapperById = infomationMapper.findById(infomation.getId());
+        if (infomationMapperById == null) {
+            throw new RuntimeException("编辑失败,请检查ID是否正确");
+        }
         return infomationMapper.update(infomation);
     }
 }
