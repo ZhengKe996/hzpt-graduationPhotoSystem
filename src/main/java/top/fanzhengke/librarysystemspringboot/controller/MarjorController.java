@@ -84,7 +84,7 @@ public class MarjorController {
 
     @ApiOperation(value = "新增专业信息")
     @PostMapping
-    public Result save(Marjor marjor) {
+    public Result save(@RequestBody Marjor marjor) {
         try {
             marjorService.addMarjor(marjor);
         } catch (RuntimeException e) {
@@ -99,7 +99,7 @@ public class MarjorController {
 
     @ApiOperation(value = "编辑专业信息")
     @PutMapping
-    public Result update(Marjor marjor) {
+    public Result update(@RequestBody Marjor marjor) {
         try {
             marjorService.update(marjor);
         } catch (RuntimeException e) {

@@ -1,8 +1,11 @@
 package top.fanzhengke.librarysystemspringboot.service;
 
+import top.fanzhengke.librarysystemspringboot.domain.College;
 import top.fanzhengke.librarysystemspringboot.domain.Infomation;
+import top.fanzhengke.librarysystemspringboot.domain.Marjor;
 import top.fanzhengke.librarysystemspringboot.entity.PageResult;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface InfomationService {
@@ -36,7 +39,7 @@ public interface InfomationService {
      * @param years
      * @return
      */
-    public List<String> findMarjor(Integer cid, String years);
+    public List<Marjor> findMarjor(Integer cid, String years);
 
     /**
      * @param cid
@@ -44,7 +47,7 @@ public interface InfomationService {
      * @param mid
      * @return
      */
-    public List<String> findClassName(Integer cid, String years, Integer mid);
+    public List<Infomation> findClassName(Integer cid, String years, Integer mid);
 
     /**
      * 根据id删除
@@ -70,4 +73,5 @@ public interface InfomationService {
      */
     public Boolean update(Infomation infomation);
 
+    public List<College> findCidYears();
 }

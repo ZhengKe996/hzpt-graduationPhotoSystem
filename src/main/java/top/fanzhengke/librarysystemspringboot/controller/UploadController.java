@@ -28,11 +28,10 @@ public class UploadController {
                 Map upload = UploadUtil.upload(files[i]);
                 result.add(upload);
             }
-            System.out.println(result);
-            return new Result(false, MessageConstant.ADD_PHOTO_SUCCESS, result);
+            return new Result(true, MessageConstant.ADD_PHOTO_SUCCESS, result);
         } catch (Exception e) {
             e.printStackTrace();
-            return new Result(true, MessageConstant.ADD_PHOTO_FAIL);
+            return new Result(false, MessageConstant.ADD_PHOTO_FAIL);
         }
     }
 }

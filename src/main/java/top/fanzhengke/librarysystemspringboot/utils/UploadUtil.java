@@ -39,8 +39,8 @@ public class UploadUtil {
         }
 
         //文件上传路径(根据情况修改)
-//        String path = "D:/images/";
-        String path = "/Users/coco/Downloads";
+        String path = "D:/images/";
+//        String path = "/Users/coco/Downloads";
 
 //        fileName = UUID.randomUUID().toString().replace("-", "") + suffixName;
 

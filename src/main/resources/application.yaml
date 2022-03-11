@@ -5,13 +5,20 @@ spring:
     username: root
     password: fzk686292.
     driver-class-name: com.mysql.cj.jdbc.Driver
-
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
 
   config:
     activate:
       on-profile: dev
+  main:
+    allow-circular-references: true
+
 server:
   port: 8000
+
 
 #springdoc:
 #  swagger-ui:
@@ -27,11 +34,16 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
 
   config:
     activate:
       on-profile: pro
+    main:
+        allow-circular-references: true
 server:
   port: 8080
 

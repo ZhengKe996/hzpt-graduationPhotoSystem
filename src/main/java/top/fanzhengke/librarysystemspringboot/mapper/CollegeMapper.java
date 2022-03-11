@@ -16,6 +16,9 @@ public interface CollegeMapper {
     @Select("select * from college where id = #{id}")
     public College findById(Integer id);
 
+    @Select("select * from college where college = #{college}")
+    public College findByCollege(String college);
+
     @Delete("delete from college where id = #{id}")
     public Boolean delete(Integer id);
 
@@ -24,9 +27,9 @@ public interface CollegeMapper {
 
     @Update("<script>"
             + "update college set"
-            +   "<if test = 'college != null'>"
-            +       "college = #{college}"
-            +   "</if>"
+            + "<if test = 'college != null'>"
+            + "college = #{college}"
+            + "</if>"
             + "where id = #{id}"
             + "</script>")
     public Boolean updateCollege(College college);

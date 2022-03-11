@@ -1,4 +1,4 @@
-package top.fanzhengke.librarysystemspringboot.constant;
+package top.fanzhengke.librarysystemspringboot.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

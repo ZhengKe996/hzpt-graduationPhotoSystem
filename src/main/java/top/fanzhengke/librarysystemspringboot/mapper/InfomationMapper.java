@@ -41,8 +41,8 @@ public interface InfomationMapper {
     @Select("select mid from infomation where mid = #{mid} group by mid")
     public String findByMid(Integer mid);
 
-    @Select("select cname from infomation where cid = #{cid} and years = #{years} and mid = #{mid}")
-    public List<String> findClassName(Integer cid, String years, Integer mid);
+    @Select("select * from infomation where cid = #{cid} and years = #{years} and mid = #{mid}")
+    public List<Infomation> findClassName(Integer cid, String years, Integer mid);
 
     @Delete("delete from infomation where id = #{id}")
     public Boolean delete(Integer id);

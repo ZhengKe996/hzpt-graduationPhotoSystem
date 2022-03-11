@@ -66,7 +66,7 @@ public class CollegeController {
 
     @ApiOperation(value = "新增学院信息")
     @PostMapping
-    public Result save(College college) {
+    public Result save(@RequestBody College college) {
         try {
             collegeService.save(college);
         } catch (RuntimeException e) {
@@ -81,7 +81,7 @@ public class CollegeController {
 
     @ApiOperation(value = "编辑学院信息")
     @PutMapping
-    public Result update(College college) {
+    public Result update(@RequestBody College college) {
         try {
             collegeService.update(college);
         } catch (RuntimeException e) {

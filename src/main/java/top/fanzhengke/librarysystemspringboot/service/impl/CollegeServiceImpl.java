@@ -30,6 +30,10 @@ public class CollegeServiceImpl implements CollegeService {
 
     @Override
     public Boolean save(College college) {
+        College collegeMapperByCollege = collegeMapper.findByCollege(college.getCollege());
+        if (collegeMapperByCollege != null){
+            throw new RuntimeException("新增学院失败,学院已存在");
+        }
         return collegeMapper.addCollege(college);
     }
 

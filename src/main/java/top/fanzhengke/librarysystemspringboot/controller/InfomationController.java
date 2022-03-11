@@ -4,12 +4,15 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import top.fanzhengke.librarysystemspringboot.constant.MessageConstant;
+import top.fanzhengke.librarysystemspringboot.domain.College;
 import top.fanzhengke.librarysystemspringboot.domain.Infomation;
+import top.fanzhengke.librarysystemspringboot.domain.Marjor;
 import top.fanzhengke.librarysystemspringboot.entity.PageResult;
 import top.fanzhengke.librarysystemspringboot.entity.Result;
 import top.fanzhengke.librarysystemspringboot.service.InfomationService;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 
 @Api(tags = "毕业照操作")
@@ -19,6 +22,18 @@ import java.util.List;
 public class InfomationController {
     @Resource
     private InfomationService infomationService;
+
+    @ApiOperation(value = "查询所有学院 年份信息")
+    @GetMapping("/findAllCidYears")
+    public Result findCidYears() {
+        try {
+            List<College> list = infomationService.findCidYears();
+            return new Result(true, MessageConstant.QUERY_COLLEGE_SUCCESS, list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.QUERY_COLLEGE_FAIL);
+        }
+    }
 
     @ApiOperation(value = "分页查询所有毕业照 可根据 年份 学院 查询")
     @GetMapping
@@ -72,7 +87,7 @@ public class InfomationController {
     @GetMapping("/findMarjor")
     public Result findMarjor(@RequestParam("cid") Integer cid, @RequestParam("years") String years) {
         try {
-            List<String> list = infomationService.findMarjor(cid, years);
+            List<Marjor> list = infomationService.findMarjor(cid, years);
             return new Result(true, MessageConstant.QUERY_MARJOR_SUCCESS, list);
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -90,7 +105,7 @@ public class InfomationController {
                                 @RequestParam("years") String years,
                                 @RequestParam("mid") Integer mid) {
         try {
-            List<String> list = infomationService.findClassName(cid, years, mid);
+            List<Infomation> list = infomationService.findClassName(cid, years, mid);
             return new Result(true, MessageConstant.QUERY_CLASSNAME_SUCCESS, list);
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -118,7 +133,7 @@ public class InfomationController {
 
     @ApiOperation(value = "新增毕业照信息")
     @PostMapping
-    public Result save(Infomation infomation) {
+    public Result save(@RequestBody Infomation infomation) {
         try {
             infomationService.addInfomation(infomation);
         } catch (RuntimeException e) {
@@ -133,7 +148,7 @@ public class InfomationController {
 
     @ApiOperation(value = "编辑毕业照信息")
     @PutMapping
-    public Result update(Infomation infomation) {
+    public Result update(@RequestBody Infomation infomation) {
         try {
             infomationService.update(infomation);
         } catch (RuntimeException e) {
